@@ -1,7 +1,7 @@
 import React from 'react';
 
 const FriendsList = (props) => (
-	<div className="list">
+	<div className="list-container">
 		{props.friends.map((friend) => (
 			<div className="Friend-container" key={friend.id}>
 				<p>Name: {friend.name}</p>
