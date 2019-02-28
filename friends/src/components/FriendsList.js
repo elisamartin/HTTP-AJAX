@@ -9,8 +9,8 @@ const FriendsList = (props) => {
 					<p>Age: {friend.age}</p>
 					<p>Email: {friend.email}</p>
 					<div>
-						<button>Update</button>
-						<button onClick={() => props.deleteFriend(friend.id)}>Delete</button>
+						<button onClick={() => this.getCurrentFriend(props)}>Update</button>
+						<button onClick={() => this.deleteFriend(props.id)}>Delete</button>
 					</div>
 				</div>
 			))}
