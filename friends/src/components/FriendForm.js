@@ -14,6 +14,11 @@ class FriendForm extends React.Component {
 		this.setState({ [event.target.name]: event.target.value });
 	};
 
+	submitHandler = (event) => {
+		event.preventDefault();
+		this.props.addNewFriend(this.state);
+	};
+
 	render() {
 		return (
 			<div className="form-container">
@@ -21,7 +26,7 @@ class FriendForm extends React.Component {
 					<input type="text" name="name" placeholder="Name" onChange={this.changeHandler} />
 					<input type="number" name="age" placeholder="Age" onChange={this.changeHandler} />
 					<input type="text" name="email" placeholder="Email" onChange={this.changeHandler} />
-					<button type="submit" onClick={this.addNewFriend}>
+					<button type="submit" onClick={this.submitHandler}>
 						Add Friend
 					</button>
 				</form>

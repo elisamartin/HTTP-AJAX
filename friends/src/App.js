@@ -20,36 +20,33 @@ class App extends Component {
 	}
 
 	handleChange = (event) => {
-		this.setState({ newFriend: { ...this.state.newFriend, [event.target.name]: event.target.value } });
+		this.setState((prevState) => {
+			return {
+				newFriend: {
+					...prevState.newFriend,
+					[event.target.name]: event.target.value
+				}
+			};
+		});
 	};
 
-	addNewFriend = () => {
-		const newFriend = this.state.newFriend;
-		console.log(newFriend);
+	addNewFriend = (friend) => {
 		axios
-			.post('http://localhost:5000/friends', newFriend)
-			.then((response) => {
-				this.setState({ friends: response.data, newFriend: '' });
+			.post('http://localhost:5000/friends/', friend)
+			.then((res) => {
+				console.log(res);
+				this.setState({
+					friends: res.data
+				});
 			})
-			.catch((err) => {
-				console.log(err);
-			});
+			.catch((err) => console.log(err));
 	};
 
 	render() {
 		return (
 			<div className="App-container">
-				<FriendForm
-					newFriend={this.state.newFriend}
-					addNewFriend={this.addNewFriend}
-					handleChanges={this.handleChange}
-				/>
-				<FriendsList
-					friends={this.state.friends}
-					newFriend={this.state.newFriend}
-					addNewFriend={this.addNewFriend}
-					handleChanges={this.handleChange}
-				/>
+				<FriendForm {...this.props} addNewFriend={this.addNewFriend} handleChanges={this.handleChange} />
+				<FriendsList friends={this.state.friends} />
 			</div>
 		);
 	}
