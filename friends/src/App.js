@@ -42,11 +42,22 @@ class App extends Component {
 			.catch((err) => console.log(err));
 	};
 
+	deleteOldFriend = (id) => {
+		axios
+			.delete(`http://localhost:5000/friends/${id}`)
+			.then((res) => {
+				this.setState({ friends: res.data });
+			})
+			.catch((err) => {
+				console.log('Error', err);
+			});
+	};
+
 	render() {
 		return (
 			<div className="App-container">
 				<FriendForm {...this.props} addNewFriend={this.addNewFriend} handleChanges={this.handleChange} />
-				<FriendsList friends={this.state.friends} />
+				<FriendsList friends={this.state.friends} deleteFriend={this.deleteOldFriend} />
 			</div>
 		);
 	}
